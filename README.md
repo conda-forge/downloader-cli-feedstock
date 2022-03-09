@@ -9,6 +9,8 @@ Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/downloader-cli-
 
 Summary: A simple downloader written in Python with an awesome progressbar.
 
+Development: https://github.com/deepjyoti30/downloader-cli
+
 Current build status
 ====================
 
