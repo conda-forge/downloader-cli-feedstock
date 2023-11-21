@@ -14,8 +14,8 @@ build:
   number: 0
   noarch: python
   entry_points:
-    - dw = downloader_cli.download:main
-  script: {{ PYTHON }} -m pip install . -vv
+    - dw = downloader_cli.main:main
+  script: {{ PYTHON }} -m pip install . -vvv
 
 requirements:
   host:
