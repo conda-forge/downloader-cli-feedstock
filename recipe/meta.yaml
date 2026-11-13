@@ -1,5 +1,5 @@
 {% set name = "downloader-cli" %}
-{% set version = "0.3.4" %}
+{% set version = "0.4.1" %}
 
 
 package:
@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/downloader_cli-{{ version }}.tar.gz
-  sha256: 61b40984da05ce0563721126fc7ff977dfdbb0c1bb875f8e9305765a5e49eddb
+  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/downloader_cli-{{ version }}.tar.gz
+  sha256: af0d89c39f850692029ab4a29bd6638b2980b4ecca2214611fff0a82300f2995
 
 build:
-  number: 1
+  number: 0
   noarch: python
   entry_points:
     - dw = downloader_cli.main:main
