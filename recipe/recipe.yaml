@@ -1,0 +1,50 @@
+context:
+  name: downloader-cli
+  version: "0.4.1"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://files.pythonhosted.org/packages/source/${{ name[0] }}/${{ name }}/downloader_cli-${{ version }}.tar.gz
+  sha256: af0d89c39f850692029ab4a29bd6638b2980b4ecca2214611fff0a82300f2995
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vvv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - dw = downloader_cli.main:main
+
+requirements:
+  host:
+    - pip
+    - python ${{ python_min }}.*
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+    - urllib3 >=1.25.6
+
+tests:
+  - python:
+      imports:
+        - downloader_cli
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+  - script:
+      - dw --help
+
+about:
+  homepage: https://github.com/deepjyoti30/downloader-cli
+  summary: A simple downloader written in Python with an awesome progressbar.
+  license: MIT
+  license_file: LICENSE
+  repository: https://github.com/deepjyoti30/downloader-cli
+
+extra:
+  recipe-maintainers:
+    - HeavyTony2
