@@ -1,47 +1,49 @@
-{% set name = "downloader-cli" %}
-{% set version = "0.4.1" %}
-
+context:
+  name: downloader-cli
+  version: "0.4.1"
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+  name: ${{ name|lower }}
+  version: ${{ version }}
 
 source:
-  url: https://files.pythonhosted.org/packages/source/{{ name[0] }}/{{ name }}/downloader_cli-{{ version }}.tar.gz
+  url: https://files.pythonhosted.org/packages/source/${{ name[0] }}/${{ name }}/downloader_cli-${{ version }}.tar.gz
   sha256: af0d89c39f850692029ab4a29bd6638b2980b4ecca2214611fff0a82300f2995
 
 build:
   number: 0
   noarch: python
-  entry_points:
-    - dw = downloader_cli.main:main
-  script: {{ PYTHON }} -m pip install . -vvv
+  script: ${{ PYTHON }} -m pip install . -vvv --no-deps --no-build-isolation
+  python:
+    entry_points:
+      - dw = downloader_cli.main:main
 
 requirements:
   host:
     - pip
-    - python {{ python_min }}
+    - python ${{ python_min }}.*
     - setuptools
   run:
-    - python >={{ python_min }}
+    - python >=${{ python_min }}
     - urllib3 >=1.25.6
 
-test:
-  imports:
-    - downloader_cli
-  commands:
-    - pip check
-    - dw --help
-  requires:
-    - pip
-    - python {{ python_min }}
+tests:
+  - python:
+      imports:
+        - downloader_cli
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+  - script:
+      - dw --help
 
 about:
-  home: https://github.com/deepjyoti30/downloader-cli
+  homepage: https://github.com/deepjyoti30/downloader-cli
   summary: A simple downloader written in Python with an awesome progressbar.
   license: MIT
   license_file: LICENSE
-  dev_url: https://github.com/deepjyoti30/downloader-cli
+  repository: https://github.com/deepjyoti30/downloader-cli
 
 extra:
   recipe-maintainers:
